@@ -1,0 +1,12 @@
+{
+  "name": "courseraApp",
+  "displayName": "courseraApp",
+  "expo": {
+    "name": "courseraApp",
+    "slug": "courseraApp",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
