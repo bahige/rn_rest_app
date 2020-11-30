@@ -12,9 +12,6 @@ const Menu = (props) => {
    const renderMenuItem = ({ item }) => (
     <ListItem bottomDivider onPress={() => navigation.navigate('DishDetails',  {dishId: item.id})}>
       <Avatar source={ require('./images/buffet.png')} />
-      {/* <Avatar source={{uri: require('./images/buffet.png')}} /> */}
-      {/* <Avatar source={{uri: require('./' +  item.image)}} /> */}
-      {/* <Avatar source={{uri: item.image}} /> */}
       <ListItem.Content>
         <ListItem.Title>{item.name}</ListItem.Title>
         <ListItem.Subtitle>{item.description}</ListItem.Subtitle>
@@ -24,10 +21,9 @@ const Menu = (props) => {
   )
 
     return (
-      <View>
+      <View style={{marginTop:"10%", marginBottom:"10%"}}>
         <Button title="Toggle Drawer"  onPress={() => navigation.toggleDrawer()}/>
         <FlatList data={dishes} 
-        // renderItem={({item}) => <Text >{item.name}</Text>}
         renderItem={renderMenuItem}
         keyExtractor={item=>item.id.toString()}/>
       </View> 
