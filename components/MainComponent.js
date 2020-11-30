@@ -3,7 +3,6 @@ import { View, Text } from 'react-native'
 import {DISHES} from '../shared/dishes';
 import DishDetail from './DishDetail';
 import Menu from './MenuComponent';
-import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 const Main= () => {
@@ -19,7 +18,6 @@ const onDishSelect = (dishId) =>{
     console.log(dishId);
 }
 
-console.log(dishes);
 
     return (
         // <View>
@@ -39,7 +37,9 @@ console.log(dishes);
                    headerTitleStyle: {
                      color: "#fff"            
             }}}/>
+      
       </Stack.Navigator>
+
     )
 }
 

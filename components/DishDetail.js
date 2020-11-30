@@ -12,13 +12,14 @@ const DishDetail = (props) => {
 
     const [dishes, setDishes] = useState(DISHES);
 
+    console.log("dishId",dishId);
 
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       
             {dishes!=null ? <Card>
                         <Card.Title>{dishes[+dishId].name}</Card.Title>
-                        <Card.Image source={{uri: require('./images/buffet.png')}}></Card.Image>
+                        <Card.Image source={require('./images/buffet.png')}></Card.Image>
                         <Text style={{margin:10}}>
                             {dishes[+dishId].description}
                         </Text>

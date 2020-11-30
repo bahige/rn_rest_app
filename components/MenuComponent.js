@@ -10,11 +10,11 @@ const Menu = (props) => {
    const [dishes, setDishes] = useState(DISHES)
 
    const renderMenuItem = ({ item }) => (
-    <ListItem bottomDivider onPress={() => navigation.navigate('DishDetails', { dishId: item.id })}>
-      {/* <Avatar source={ require('./images/buffet.png')} /> */}
+    <ListItem bottomDivider onPress={() => navigation.navigate('DishDetails',  {dishId: item.id})}>
+      <Avatar source={ require('./images/buffet.png')} />
       {/* <Avatar source={{uri: require('./images/buffet.png')}} /> */}
       {/* <Avatar source={{uri: require('./' +  item.image)}} /> */}
-      <Avatar source={{uri: item.image}} />
+      {/* <Avatar source={{uri: item.image}} /> */}
       <ListItem.Content>
         <ListItem.Title>{item.name}</ListItem.Title>
         <ListItem.Subtitle>{item.description}</ListItem.Subtitle>
@@ -24,8 +24,8 @@ const Menu = (props) => {
   )
 
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-       
+      <View>
+        <Button title="Toggle Drawer"  onPress={() => navigation.toggleDrawer()}/>
         <FlatList data={dishes} 
         // renderItem={({item}) => <Text >{item.name}</Text>}
         renderItem={renderMenuItem}
@@ -35,3 +35,7 @@ const Menu = (props) => {
 }
 
 export default Menu
+
+
+//onPress={() => navigation.navigate('DishDetails', {  params: {dishId: item.id}})}
+//style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
