@@ -1,32 +1,36 @@
 import React, {useState} from 'react'
-import { View, Text, Button } from 'react-native'
-import {Card} from 'react-native-elements';
+import { ScrollView } from 'react-native'
 import {DISHES} from '../shared/dishes';
+import {COMMENTS} from '../shared/comments';
+import RenderDish from './Dish';
+import RenderComments from './Comments';
 
 
 
 const DishDetail = (props) => {
 
-    const {navigation, route} = props ;
+    const {route} = props ;
     const dishId = route.params.dishId;
 
     const [dishes, setDishes] = useState(DISHES);
+    const [comments, setComments] = useState(COMMENTS);
+    const [favorites, setFavorites] = useState([]);
 
     console.log("dishId",dishId);
 
+    const markFavorite= (dishId) => {
+        setFavorites(favorites.concat(dishId));
+    }
+
     return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      
-            {dishes!=null ? <Card>
-                        <Card.Title>{dishes[+dishId].name}</Card.Title>
-                        <Card.Image source={require('./images/buffet.png')}></Card.Image>
-                        <Text style={{margin:10}}>
-                            {dishes[+dishId].description}
-                        </Text>
-                    </Card> : <View></View>}
-            <Button title="Menu"  onPress={() => navigation.navigate('Menu')}/>
+        <ScrollView>
+            <RenderDish dishes={dishes} dishId={dishId} 
+            favorite={favorites.some(el => el === dishId)}
+            onPress={() => markFavorite(dishId)} 
+            />
+            <RenderComments comments={comments.filter((comment) => comment.dishId === dishId)} />
             
-        </View>
+        </ScrollView>
     )
 }
 

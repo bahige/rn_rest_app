@@ -17,14 +17,9 @@ const Home = (props) => {
 
     return (
     <ScrollView>
-        <Button title="Open Drawer"  onPress={() => navigation.toggleDrawer()}/>
-
         <RenderItem item= {dishes.filter((dish)=>dish.featured)[0]}/>
         <RenderItem item= {promotions.filter((promo)=>promo.featured)[0]}/>
         <RenderItem item= {leaders.filter((leader)=>leader.featured)[0]}/>
-        <Button title="About Us"  onPress={() => navigation.navigate('AboutUs')}/>
-
-     
     </ScrollView>
     )
 }

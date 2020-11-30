@@ -22,7 +22,6 @@ const Menu = (props) => {
 
     return (
       <View style={{marginTop:"10%", marginBottom:"10%"}}>
-        <Button title="Toggle Drawer"  onPress={() => navigation.toggleDrawer()}/>
         <FlatList data={dishes} 
         renderItem={renderMenuItem}
         keyExtractor={item=>item.id.toString()}/>
