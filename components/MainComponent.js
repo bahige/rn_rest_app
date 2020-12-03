@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { Image, StyleSheet, SafeAreaView, View, Text } from 'react-native'
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
 import MenuNavigator from './MenuNavigator';
@@ -7,9 +7,35 @@ import {Icon} from 'react-native-elements'
 import AboutNavigator from './AboutNavigator';
 import HomeNavigator from './HomeNavigator';
 import ContactNavigator from './ContactNavigator';
+import {useSelector, useDispatch} from 'react-redux';
+import {fetchDishes} from '../redux/dish/dishActions';
+import {fetchComments} from '../redux/comments/commentActions';
+import {fetchLeaders} from '../redux/leaders/leaderActions';
+import {fetchPromos} from '../redux/promos/promoActions';
+
+
 
 
 const MainComponent= () => {
+
+  const dishesList = useSelector(state => state.dishReducer);
+  const { dishes } = dishesList;
+  const promotionsList = useSelector(state => state.promoReducer);
+  const { promos } = promotionsList;
+  const leadersList = useSelector(state => state.leaderReducer);
+  const { leaders } = leadersList;
+  const commentsList = useSelector(state => state.commentReducer);
+  const { comments } = commentsList;
+
+  const dispatch = useDispatch();
+
+
+  useEffect(() => {
+    dispatch(fetchDishes());
+    dispatch(fetchPromos());
+    dispatch(fetchLeaders());
+    dispatch(fetchComments());
+  }, [])
 
   const Drawer = createDrawerNavigator();
 

@@ -2,9 +2,10 @@ import React, {useState} from 'react'
 import { View, Text, FlatList,ScrollView } from 'react-native'
 import {Card, ListItem, Avatar} from 'react-native-elements'
 import {LEADERS} from '../shared/leaders'
-
+import {useSelector, useDispatch} from 'react-redux'
 
 const History = () => {
+
     return (
         <View>
             <Card>
@@ -28,11 +29,16 @@ const History = () => {
 
 const AboutComponent = () => {
 
-    const [leaders, setLeaders] = useState(LEADERS);
+    // const [leaders, setLeaders] = useState(LEADERS);
+
+    const leadersList = useSelector(state => state.leaderReducer);
+    const {isLoading, leaders, errorMessage } = leadersList;
+
 
     const renderLeaderItem =({item})=>(
         <ListItem>
-            <Avatar rounded source={ require('./images/alberto.png')} />
+            {/* <Avatar rounded source={ require('./images/alberto.png')} /> */}
+            <Avatar rounded source={ {uri: baseUrl + item.image}} />
             <ListItem.Content>
                 <ListItem.Title>{item.name}</ListItem.Title>
                 <ListItem.Subtitle>{item.description}</ListItem.Subtitle>
