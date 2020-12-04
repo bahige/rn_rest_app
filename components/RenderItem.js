@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, Text } from 'react-native'
-import {Card} from 'react-native-elements'
+import {Card} from 'react-native-elements';
+import {baseUrl} from '../shared/baseUrl'
 
 const RenderItem = (props) => {
 
@@ -12,7 +13,7 @@ const RenderItem = (props) => {
             <Card>
                 <Card.Title>{item.name}</Card.Title>
                 <Card.FeaturedSubtitle>{item.designation}</Card.FeaturedSubtitle>
-                <Card.Image source={ require('./images/uthappizza.png')}></Card.Image> 
+                <Card.Image source={{ uri: baseUrl + item.image}}></Card.Image> 
                 <Text style={{margin: 10}}> {item.description}</Text>
             </Card>:<View></View>}
         </View>

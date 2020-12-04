@@ -2,7 +2,9 @@ import React, {useState} from 'react'
 import { View, Text, FlatList,ScrollView } from 'react-native'
 import {Card, ListItem, Avatar} from 'react-native-elements'
 import {LEADERS} from '../shared/leaders'
-import {useSelector, useDispatch} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux';
+import {baseUrl} from '../shared/baseUrl';
+
 
 const History = () => {
 

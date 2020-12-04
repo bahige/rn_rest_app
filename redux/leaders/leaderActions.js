@@ -16,18 +16,18 @@ export const leadersFailed = (errorMessage) => {
     }
 }
 
-export const addLeaders = (leaders)=>{
+export const addLeaders = (data)=>{
     return {
         type: ActionTypes.ADD_LEADERS,
-        payload: leaders
+        payload: data
     }
 }
 
 export const fetchLeaders = () => async (dispatch) => {
     try{
         dispatch(leadersLoading());
-        const {leaders}= await axios.get(baseUrl + 'leaders');
-        dispatch(addLeaders(leaders))
+        const {data}= await axios.get(baseUrl + 'leaders');
+        dispatch(addLeaders(data))
     } catch(error){
         dispatch(leadersFailed(error))
     }

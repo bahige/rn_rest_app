@@ -34,7 +34,7 @@ const onDishSelect = (dishId) =>{
             headerTitleStyle: {
               color: "#fff"            
             },
-            headerLeft: ()=><Icon name='menu'size={24} color='white' 
+            headerLeft: ()=><Icon name='menu'size={24} color='white' style={{marginLeft:20}}
             onPress={()=>navigation.toggleDrawer()}/>}}
           />
        

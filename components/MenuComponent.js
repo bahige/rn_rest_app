@@ -3,6 +3,8 @@ import { View, Text, FlatList,Button } from 'react-native'
 import { ListItem, Avatar, Tile } from "react-native-elements";
 import {DISHES} from '../shared/dishes';
 import {baseUrl} from '../shared/baseUrl';
+import {useSelector, useDispatch} from 'react-redux';
+
 
 
 const Menu = (props) => {
@@ -13,7 +15,7 @@ const Menu = (props) => {
   const dishesList = useSelector(state => state.dishReducer);
   const { dishes } = dishesList;
 
-   const renderMenuItem = ({ item }) => (
+   const renderMenuItem = ({ item, index }) => (
     // <ListItem bottomDivider onPress={() => navigation.navigate('DishDetails',  {dishId: item.id})}>
     //   <Avatar source={ require('./images/buffet.png')} />
     //   <ListItem.Content>
@@ -27,7 +29,7 @@ const Menu = (props) => {
           title={item.name}
           caption={item.description}
           featured
-          onPress={() => navigation.navigate('Dishdetails', { dishId: item.id })}
+          onPress={() => navigation.navigate('DishDetails', { dishId: item.id })}
           imageSrc={{ uri: baseUrl + item.image}} />
   )
 

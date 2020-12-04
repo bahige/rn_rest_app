@@ -2,13 +2,13 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import Main from './components/MainComponent';
 import {NavigationContainer} from '@react-navigation/native'
-import {ConfigureStore} from './redux/configureStore'
+import store from './redux/configureStore'
+import { Provider } from "react-redux";
 
 
 
 export default function App() {
 
-  const store = ConfigureStore();
 
   return (
     <Provider store={store}>

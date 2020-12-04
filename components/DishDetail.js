@@ -1,10 +1,11 @@
-import React, {useState} from 'react'
-import { ScrollView } from 'react-native'
-import {DISHES} from '../shared/dishes';
-import {COMMENTS} from '../shared/comments';
+import React, {useState, useEffect} from 'react'
+import { ScrollView } from 'react-native';
 import RenderDish from './Dish';
 import RenderComments from './Comments';
-import {useSelector, useDispatch} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux';
+import {fetchDishes} from '../redux/dish/dishActions';
+import {fetchComments} from '../redux/comments/commentActions';
+
 
 
 
@@ -13,17 +14,24 @@ const DishDetail = (props) => {
     const {route} = props ;
     const dishId = route.params.dishId;
 
-    // const [dishes, setDishes] = useState(DISHES);
-    // const [comments, setComments] = useState(COMMENTS);
-    const dishesList = useSelector(state => state.dishReducer);
-    const { dishes } = dishesList;
+
 
     const commentsList = useSelector(state => state.commentReducer);
-    const {  comments } = commentsList;
+    const { isLoading: loading, comments: comments, errorMessage: error} = commentsList;
+
+
+    console.log('comments of dish', comments);
+    console.log('dishId', typeof dishId);
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(fetchDishes());
+        dispatch(fetchComments());
+       
+      }, [])
 
     const [favorites, setFavorites] = useState([]);
-
-    console.log("dishId",dishId);
 
     const markFavorite= (dishId) => {
         setFavorites(favorites.concat(dishId));
@@ -31,11 +39,17 @@ const DishDetail = (props) => {
 
     return (
         <ScrollView>
-            <RenderDish dishes={dishes} dishId={dishId} 
+            <RenderDish 
+            // dish={dishes.filter((dish)=>dish.featured)[+dishId]}
+            // dishes={dishes} 
+            dishId={dishId} 
             favorite={favorites.some(el => el === dishId)}
             onPress={() => markFavorite(dishId)} 
             />
-            <RenderComments comments={comments.filter((comment) => comment.dishId === dishId)} />
+
+            {loading ? (<View>Loading</View> ): error ? 
+            (<View>{error}</View>) : 
+            <RenderComments comments={comments.filter((comment) => comment.dishId === dishId)} />}
             
         </ScrollView>
     )

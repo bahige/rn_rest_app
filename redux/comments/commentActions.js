@@ -3,6 +3,12 @@ import {baseUrl} from '../../shared/baseUrl';
 import axios from 'axios';
 
 
+export const commentsLoading = () =>{
+    return {
+        type: ActionTypes.COMMENTS_LOADING,
+    }
+}
+
 export const commentsFailed = (errorMessage) =>{
     return {
         type: ActionTypes.COMMENTS_FAILED,
@@ -10,17 +16,18 @@ export const commentsFailed = (errorMessage) =>{
     }
 }
 
-export const addComments = (comments)=> {
+export const addComments = (data)=> {
     return {
         type: ActionTypes.ADD_COMMENTS,
-        payload: comments
+        payload: data
     }
 }
 
-export const fetchPromos = () => async (dispatch) => {
+export const fetchComments = () => async (dispatch) => {
     try{
-        const {comments} = await axios.get(baseUrl + 'comments');
-        dispatch(addComments(comments));
+        dispatch(commentsLoading());
+        const {data} = await axios.get(baseUrl + 'comments');
+        dispatch(addComments(data));
     }
     catch(error){
         dispatch(commentsFailed(error));

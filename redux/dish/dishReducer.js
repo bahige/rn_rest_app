@@ -16,3 +16,19 @@ export const dishReducer = (state = { isLoading : false, errorMessage: null, dis
             return state;
     }
 }
+
+export const singleDishReducer = (state = { isLoading : false, errorMessage: null, dish: {}}, action)=>{
+    switch(action.type){
+        case ActionTypes.DISH_LOADING:
+            return {...state, isLoading: true, errorMessage :null, dish:action.payload};
+
+        case ActionTypes.ADD_DISH:
+            return {...state, isLoading: false, errorMessage: null, dish: action.payload};
+        
+        case ActionTypes.DISH_FAILED:
+            return {...state, isLoading : false, errorMessage: action.payload};
+
+        default: 
+            return state;
+    }
+}

@@ -3,7 +3,7 @@ import { View, Text } from 'react-native'
 import {DISHES} from '../shared/dishes';
 import { createStackNavigator } from '@react-navigation/stack';
 import AboutComponent from './AboutComponent';
-import {Icon} from 'react-native-elements'
+import {Icon} from 'react-native-elements';
 
 
 const AboutNavigator= (props) => {
@@ -34,7 +34,7 @@ const onDishSelect = (dishId) =>{
             headerTitleStyle: {
               color: "#fff"            
             },
-            headerLeft: ()=><Icon name='menu'size={24} color='white' 
+            headerLeft: ()=><Icon name='menu'size={24} color='white' style={{marginLeft:20}}
             onPress={()=>navigation.toggleDrawer()}/>}}
           /> 
       </Stack.Navigator>

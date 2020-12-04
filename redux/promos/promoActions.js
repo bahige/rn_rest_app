@@ -13,18 +13,18 @@ export const promosFailed = (errorMessage) =>{
     }
 }
 
-export const addPromos = (promos)=> {
+export const addPromos = (data)=> {
     return {
         type: ActionTypes.ADD_PROMOS,
-        payload: promos
+        payload: data
     }
 }
 
 export const fetchPromos = () => async (dispatch) => {
     try{
         dispatch(promosLoading());
-        const {promos} = await axios.get(baseUrl + 'promotions');
-        dispatch(addPromos(promos));
+        const {data} = await axios.get(baseUrl + 'promotions');
+        dispatch(addPromos(data));
     }
     catch(error){
         dispatch(promosFailed(error));
