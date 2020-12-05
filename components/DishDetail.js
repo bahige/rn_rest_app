@@ -5,7 +5,7 @@ import RenderComments from './Comments';
 import {useSelector, useDispatch} from 'react-redux';
 import {fetchDishes} from '../redux/dish/dishActions';
 import {fetchComments} from '../redux/comments/commentActions';
-
+import LoadingComponent from './LoadingComponent';
 
 
 
@@ -47,7 +47,7 @@ const DishDetail = (props) => {
             onPress={() => markFavorite(dishId)} 
             />
 
-            {loading ? (<View>Loading</View> ): error ? 
+            {loading ? (<LoadingComponent/>): error ? 
             (<View>{error}</View>) : 
             <RenderComments comments={comments.filter((comment) => comment.dishId === dishId)} />}
             

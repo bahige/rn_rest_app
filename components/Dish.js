@@ -3,8 +3,9 @@ import { View, Text} from 'react-native'
 import {Card, Icon} from 'react-native-elements';
 import {baseUrl} from '../shared/baseUrl';
 import { useDispatch, useSelector } from "react-redux";
-import { singleDishReducer } from '../redux/dish/dishReducer';
 import {fetchDishes} from '../redux/dish/dishActions';
+import LoadingComponent from './LoadingComponent';
+
 
 
 
@@ -29,7 +30,7 @@ const Dish = (props) => {
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       
-            {loading ? (<View> Loading</View>) : error ? (<View>{error} </View>) : <Card>
+            {loading ? (<LoadingComponent/>) : error ? (<View>{error} </View>) : <Card>
                         <Card.Title>{dishes[dishId].name}</Card.Title>
                         {/* <Card.Title><Text>{dish.name}</Text></Card.Title> */}
                         <Card.Image source={{ uri: baseUrl + dishes[dishId].image}}></Card.Image>

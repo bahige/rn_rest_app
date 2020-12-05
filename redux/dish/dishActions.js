@@ -31,37 +31,3 @@ export const fetchDishes = () => async (dispatch) => {
       dispatch(dishesFailed(error));
     }
   };
-
-
-/******************************************************************************/
-
-export const dishLoading = (dishId) =>{
-    return {
-    type:ActionTypes.DISH_LOADING,
-    payload: dishId
-}}
-
-export const dishFailed = (errorMessage)=>{
-    return {
-        type: ActionTypes.DISH_FAILED,
-        payload: errorMessage
-    }
-}
-
-export const addDish= (data) =>{
-    return {
-        type:ActionTypes.ADD_DISH,
-        payload : data
-    }
-}
-
-
-export const fetchDish = (dishId) => async (dispatch) => {
-    try {
-      dispatch(dishLoading(dishId));
-      const  {data}  = await axios.get(baseUrl + 'dishes/' + dishId);
-      dispatch(addDish(data));
-    } catch (error) {
-      dispatch(dishFailed(error));
-    }
-  };

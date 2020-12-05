@@ -4,6 +4,7 @@ import {Card, ListItem, Avatar} from 'react-native-elements'
 import {LEADERS} from '../shared/leaders'
 import {useSelector, useDispatch} from 'react-redux';
 import {baseUrl} from '../shared/baseUrl';
+import LoadingComponent from './LoadingComponent';
 
 
 const History = () => {
@@ -48,6 +49,7 @@ const AboutComponent = () => {
         </ListItem>
     )
     return (
+            
         <ScrollView style={{marginTop:"10%", marginBottom:"10%"}}>
             <History/>
             <Card>
@@ -56,8 +58,9 @@ const AboutComponent = () => {
                 <FlatList data={leaders} 
                 renderItem={renderLeaderItem}
                 keyExtractor={item=>item.id.toString()}/>
-            </Card>      
-        </ScrollView>
+            </Card>
+        </ScrollView> 
+                 
     )
 }
 

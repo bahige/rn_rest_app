@@ -4,16 +4,16 @@ import { ListItem, Avatar, Tile } from "react-native-elements";
 import {DISHES} from '../shared/dishes';
 import {baseUrl} from '../shared/baseUrl';
 import {useSelector, useDispatch} from 'react-redux';
+import LoadingComponent from './LoadingComponent';
 
 
 
 const Menu = (props) => {
 
    const {navigation} = props;
-  //  const [dishes, setDishes] = useState(DISHES)
 
   const dishesList = useSelector(state => state.dishReducer);
-  const { dishes } = dishesList;
+  const { isLoading, dishes, errorMessage } = dishesList;
 
    const renderMenuItem = ({ item, index }) => (
     // <ListItem bottomDivider onPress={() => navigation.navigate('DishDetails',  {dishId: item.id})}>
@@ -34,10 +34,13 @@ const Menu = (props) => {
   )
 
     return (
+      
       <View style={{marginTop:"10%", marginBottom:"10%"}}>
+       {isLoading ? <LoadingComponent/> : errorMessage ? 
+       <View>{errorMessage}</View> : 
        <FlatList data={dishes} 
         renderItem={renderMenuItem}
-        keyExtractor={item=>item.id.toString()}/>
+        keyExtractor={item=>item.id.toString()}/>}
       </View> 
     )
 }

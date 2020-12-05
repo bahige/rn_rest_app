@@ -9,6 +9,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import {fetchDishes} from '../redux/dish/dishActions';
 import {fetchLeaders} from '../redux/leaders/leaderActions';
 import {fetchPromos} from '../redux/promos/promoActions';
+import LoadingComponent from './LoadingComponent'
 
 
 
@@ -19,12 +20,14 @@ const Home = (props) => {
     // const [leaders, setLeaders] = useState(LEADERS);
  
     const dishesList = useSelector(state => state.dishReducer);
-    const {isLoading: isLoadingDishes,  dishes: dishes, errorMessage: errorDishMessage } = dishesList;
+    const {isLoading: loadingDishes,  dishes: dishes, errorMessage: dishError } = dishesList;
     console.log("dishes", dishes);
+
     const promotionsList = useSelector(state => state.promoReducer);
-    const { promos } = promotionsList;
+    const {isLoading: loadingPromos,  promos: promos, errorMessage: promoError } = promotionsList;
+
     const leadersList = useSelector(state => state.leaderReducer);
-    const { leaders } = leadersList;
+    const {isLoading: loadingLeaders,  leaders: leaders, errorMessage: leaderError } = leadersList;
 
     const dispatch = useDispatch();
 
@@ -38,8 +41,12 @@ const Home = (props) => {
 
     return (
     <ScrollView>
-        <RenderItem item= {dishes.filter((dish)=>dish.featured)[0]}/>
+        {loadingDishes ? <LoadingComponent/> :
+         dishError ? <View> {dishError} </View> : 
+         <RenderItem item= {dishes.filter((dish)=>dish.featured)[0]}/>}
+
         <RenderItem item= {promos.filter((promo)=>promo.featured)[0]}/>
+
         <RenderItem item= {leaders.filter((leader)=>leader.featured)[0]}/>
     </ScrollView>
     )
