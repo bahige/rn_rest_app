@@ -34,3 +34,19 @@ export const fetchComments = () => async (dispatch) => {
     }
 
 }
+
+
+/********************************************************************************/
+
+export const postComment = (dishId, rating, author, comment)  => (dispatch) => {
+
+    setTimeout(() => {
+        dispatch(addComment(dishId, rating, author, comment));
+    }, 2000);
+};
+
+
+export const addComment = (data) => ({
+    type: ActionTypes.ADD_COMMENT,
+    payload: {dishId : data.dishId, rating: data.rating, author: data.author, comment: data.comment}
+});

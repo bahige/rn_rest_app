@@ -1,13 +1,15 @@
 import * as ActionTypes from '../actionTypes';
 
-const favoriteReducer = (state={favorites: []}, action) => {
+export const favoritesReducer = (state= {favorites: []}  , action) => {
     switch( action.type){
+    
         case ActionTypes.ADD_FAVORITE:
-            if(state.some(el => el===action.payload)){
+            if(state.favorites.some(el => el===action.payload)){
                 return state;
+                // If the dish is already in the favorites list, no need to add the dish to the favs list.
             }
             else{
-                return state.concat(action.payload);
+                return {...state, favorites: favorites.concat(action.payload)};//payload will contain the dishId of the dish that we want to add to favorites.
             }
         
         default: 

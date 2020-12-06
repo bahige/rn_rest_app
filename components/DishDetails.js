@@ -9,7 +9,7 @@ import LoadingComponent from './LoadingComponent';
 import {postFavorite} from '../redux/favorites/favoriteActions';
 
 
-const DishDetail = (props) => {
+const DishDetails = (props) => {
 
     const {route} = props ;
     const dishId = route.params.dishId;
@@ -57,4 +57,5 @@ const DishDetail = (props) => {
 }
 
 
-export default DishDetail
+export default DishDetails
+

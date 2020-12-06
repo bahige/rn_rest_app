@@ -5,6 +5,7 @@ import {dishReducer} from '../redux/dish/dishReducer';
 import {leaderReducer} from '../redux/leaders/leaderReducer';
 import {promoReducer} from '../redux/promos/promoReducer';
 import {commentReducer} from '../redux/comments/commentReducer';
+import {favoritesReducer} from '../redux/favorites/favoriteReducer';
 
 
 const reducer = combineReducers({
@@ -12,6 +13,7 @@ const reducer = combineReducers({
     leaderReducer: leaderReducer,
     promoReducer: promoReducer,
     commentReducer: commentReducer,
+    favoritesReducer: favoritesReducer,
 })
 
 
