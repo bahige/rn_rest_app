@@ -11,7 +11,7 @@ import { postComment } from '../redux/comments/commentActions';
 
 const Dish = (props) => {
 
-    const {dishId, favorite, onPress} = props ;
+    const {dishId, onPress} = props ;
     // const dishId = route.params.dishId;
 
     const [modalVisible, setModalVisible] = useState(false);
@@ -20,6 +20,7 @@ const Dish = (props) => {
     const [comment, setComment] = useState("");
     const [date, setDate] = useState(Date.now());
 
+   
     const toggleModal = () => {
         setModalVisible(!modalVisible);
     }
@@ -33,6 +34,10 @@ const Dish = (props) => {
 
     const dishesList = useSelector(state => state.dishReducer);
     const { isLoading: loading, errorMessage: error, dishes: dishes } = dishesList;
+
+    const favoritesList = useSelector(state => state.favoritesReducer);
+    const {  isLoading: loadingFavs, favorites: favorites, errorMessage: errorFavs } = favoritesList;
+    console.log("favs", favorites);
 
     const dispatch = useDispatch();
 
@@ -63,10 +68,10 @@ const Dish = (props) => {
                         <Icon
                             raised //button like display of icon
                             reverse //reverse color
-                            name={ favorite ? 'heart' : 'heart-o'}
+                            name={ favorites.some(el => el === dishId) ? 'heart' : 'heart-o'}
                             type='font-awesome'
                             color='#f50'
-                            onPress={() => favorite ? console.log('Already favorite') : onPress()}
+                            onPress={() => favorites.some(el => el === dishId) ? console.log('Already favorite') : onPress()}
                         />
                         <Icon
                             raised //button like display of icon

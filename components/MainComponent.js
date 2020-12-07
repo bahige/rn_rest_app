@@ -7,6 +7,7 @@ import AboutNavigator from './AboutNavigator';
 import HomeNavigator from './HomeNavigator';
 import ContactNavigator from './ContactNavigator';
 import ReservationNavigator from './ReservationNavigator';
+import FavoriteNavigator from './FavoriteNavigator';
 
 
 
@@ -85,6 +86,18 @@ const MainComponent= () => {
               color={tintColor}/>
             ),
           }} />
+
+            <Drawer.Screen name="My Favorites" component={FavoriteNavigator}
+            options={{title:"My Favorites", drawerLabel: "My Favorites",
+            drawerIcon:({tintColor, focused}) =>(
+              <Icon
+              name='heart'
+              type="font-awesome"
+              size={24}
+              color={tintColor}/>
+            ),
+          }} />   
+
             <Drawer.Screen name="Reservation" component={ReservationNavigator}
             options={{title:"Reserve Table", drawerLabel: "Reserve Table",
             drawerIcon:({tintColor, focused}) =>(

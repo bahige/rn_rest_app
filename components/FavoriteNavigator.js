@@ -1,12 +1,11 @@
 import React, {useState} from 'react'
 import { View, Text } from 'react-native'
-import {DISHES} from '../shared/dishes';
 import { createStackNavigator } from '@react-navigation/stack';
-import AboutComponent from './AboutComponent';
 import {Icon} from 'react-native-elements';
+import FavoriteComponent from './FavoriteComponent';
 
 
-const AboutNavigator= (props) => {
+const FavoriteNavigator= (props) => {
 
 
 const {navigation} =props;
@@ -16,7 +15,7 @@ const Stack = createStackNavigator();
 
     return (
       <Stack.Navigator>
-          <Stack.Screen name="About Us" component={AboutComponent} 
+          <Stack.Screen name="My Favorites" component={FavoriteComponent} 
             options={{ headerStyle:{backgroundColor:"#512DA8"},
             headerTintColor: '#fff',
             headerTitleStyle: {
@@ -30,5 +29,5 @@ const Stack = createStackNavigator();
     )
 }
 
-export default AboutNavigator
+export default FavoriteNavigator
 

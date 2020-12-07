@@ -18,9 +18,11 @@ const DishDetail = (props) => {
 
     const commentsList = useSelector(state => state.commentReducer);
     const { isLoading: loading, comments: comments, errorMessage: error} = commentsList;
-    // const favoritesList = useSelector(state => state.favoritesReducer);
-    // const { isLoading: loadingFavs, favorites: favorites } = favoritesList;
-    const [favorites, setFavorites] = useState([]);
+
+    const favs = useSelector(state => state.favoritesReducer);
+    const { favorites} = commentsList;
+
+    // const [favorites, setFavorites] = useState([]);
 
     const dispatch = useDispatch();
 
@@ -30,13 +32,15 @@ const DishDetail = (props) => {
       }, [])
 
 
-    const markFavoriteReducer= (dishId) => {
+    const markFavorite= (dishId) => {
         dispatch(postFavorite(dishId));
+        console.log("favs", favorites);
+        console.log("dishId", dishId);
     }
 
-    const markFavorite= (dishId) => {
-        setFavorites(favorites.concat(dishId));
-    }
+    // const markFavorite= (dishId) => {
+    //     setFavorites(favorites.concat(dishId));
+    // }
 
     return (
         <ScrollView>
@@ -44,7 +48,7 @@ const DishDetail = (props) => {
             // dish={dishes.filter((dish)=>dish.featured)[+dishId]}
             // dishes={dishes} 
             dishId={dishId} 
-            favorite={favorites.some(el => el === dishId)}
+            // favorite={favorites.some(el => el === dishId)}
             onPress={() => markFavorite(dishId)} 
             />
 

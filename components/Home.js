@@ -37,7 +37,6 @@ const Home = (props) => {
         dispatch(fetchLeaders());
       }, [])
 
-    const {navigation} =props;
 
     return (
     <ScrollView>
