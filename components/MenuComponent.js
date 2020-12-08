@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
 import { View, Text, FlatList,Button } from 'react-native'
-import { ListItem, Avatar, Tile } from "react-native-elements";
-import {DISHES} from '../shared/dishes';
+import { Tile } from "react-native-elements";
 import {baseUrl} from '../shared/baseUrl';
 import {useSelector, useDispatch} from 'react-redux';
 import LoadingComponent from './LoadingComponent';
+import * as Animatable from 'react-native-animatable';
 
 
 
@@ -16,14 +16,7 @@ const Menu = (props) => {
   const { isLoading, dishes, errorMessage } = dishesList;
 
    const renderMenuItem = ({ item, index }) => (
-    // <ListItem bottomDivider onPress={() => navigation.navigate('DishDetails',  {dishId: item.id})}>
-    //   <Avatar source={ require('./images/buffet.png')} />
-    //   <ListItem.Content>
-    //     <ListItem.Title>{item.name}</ListItem.Title>
-    //     <ListItem.Subtitle>{item.description}</ListItem.Subtitle>
-    //   </ListItem.Content>
-    //   <ListItem.Chevron />
-    // </ListItem>
+    <Animatable.View duration={2000}  animation="fadeInRightBig">
         <Tile
           key={index}
           title={item.name}
@@ -31,6 +24,7 @@ const Menu = (props) => {
           featured
           onPress={() => navigation.navigate('DishDetails', { dishId: item.id })}
           imageSrc={{ uri: baseUrl + item.image}} />
+    </Animatable.View>
   )
 
     return (

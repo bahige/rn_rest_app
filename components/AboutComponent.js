@@ -1,10 +1,9 @@
 import React, {useState} from 'react'
 import { View, Text, FlatList,ScrollView } from 'react-native'
 import {Card, ListItem, Avatar} from 'react-native-elements'
-import {LEADERS} from '../shared/leaders'
 import {useSelector, useDispatch} from 'react-redux';
 import {baseUrl} from '../shared/baseUrl';
-import LoadingComponent from './LoadingComponent';
+import *  as Animatable from 'react-native-animatable';
 
 
 const History = () => {
@@ -32,7 +31,6 @@ const History = () => {
 
 const AboutComponent = () => {
 
-    // const [leaders, setLeaders] = useState(LEADERS);
 
     const leadersList = useSelector(state => state.leaderReducer);
     const {isLoading, leaders, errorMessage } = leadersList;
@@ -40,7 +38,6 @@ const AboutComponent = () => {
 
     const renderLeaderItem =({item})=>(
         <ListItem>
-            {/* <Avatar rounded source={ require('./images/alberto.png')} /> */}
             <Avatar rounded source={ {uri: baseUrl + item.image}} />
             <ListItem.Content>
                 <ListItem.Title>{item.name}</ListItem.Title>
@@ -51,6 +48,7 @@ const AboutComponent = () => {
     return (
             
         <ScrollView style={{marginTop:"10%", marginBottom:"10%"}}>
+            <Animatable.View animation="fadeInDown" duration={2000} delay={1000}>
             <History/>
             <Card>
                 <Card.Title>Corporate Leadership</Card.Title>
@@ -59,6 +57,7 @@ const AboutComponent = () => {
                 renderItem={renderLeaderItem}
                 keyExtractor={item=>item.id.toString()}/>
             </Card>
+            </Animatable.View>
         </ScrollView> 
                  
     )

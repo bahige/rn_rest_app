@@ -8,7 +8,6 @@ import LoadingComponent from './LoadingComponent';
 import { postComment } from '../redux/comments/commentActions';
 
 
-
 const Dish = (props) => {
 
     const {dishId, onPress} = props ;
@@ -37,7 +36,6 @@ const Dish = (props) => {
 
     const favoritesList = useSelector(state => state.favoritesReducer);
     const {  isLoading: loadingFavs, favorites: favorites, errorMessage: errorFavs } = favoritesList;
-    console.log("favs", favorites);
 
     const dispatch = useDispatch();
 
@@ -59,7 +57,6 @@ const Dish = (props) => {
       
             {loading ? (<LoadingComponent/>) : error ? (<View>{error} </View>) : <Card>
                         <Card.Title>{dishes[dishId].name}</Card.Title>
-                        {/* <Card.Title><Text>{dish.name}</Text></Card.Title> */}
                         <Card.Image source={{ uri: baseUrl + dishes[dishId].image}}></Card.Image>
                         <Text style={{margin:10}}>
                             {dishes[dishId].description}
@@ -79,7 +76,7 @@ const Dish = (props) => {
                             name='pencil'
                             type='font-awesome'
                             color="#512DA8"
-                            onPress={() => toggleModal()}
+                            onPress={() => addComment()}
                         />
                         </View>
                     </Card>}

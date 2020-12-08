@@ -38,15 +38,32 @@ export const fetchComments = () => async (dispatch) => {
 
 /********************************************************************************/
 
-export const postComment = (dishId, rating, author, comment)  => (dispatch) => {
+export const postComment = (dishId, rating, author, comment)  => async (dispatch) => {
 
-    setTimeout(() => {
-        dispatch(addComment(dishId, rating, author, comment));
-    }, 2000);
+    try {
+        dispatch(commentLoading());
+        // const  {data}  = await axios.get(baseUrl + 'dishes/' + dishId);
+        setTimeout(() => {
+            dispatch(addComment({dishId, rating, author, comment}));
+        }, 2000); 
+    } catch (error) {
+        dispatch(commentFailed(error));
+      }
+
 };
 
 
 export const addComment = (data) => ({
     type: ActionTypes.ADD_COMMENT,
-    payload: {dishId : data.dishId, rating: data.rating, author: data.author, comment: data.comment}
+    payload: {dishId : data.dishId, rating: data.rating, author: data.author, comment: data.comment,
+    date: new Date(Date.now()).toISOString(), id:Math.floor(Math.random() * 100)}
 });
+
+export const commentLoading = () => ({
+    type: ActionTypes.COMMENT_LOADING
+});
+
+export const commentFailed = (errorMessage) => ({
+    type: ActionTypes.COMMENT_FAILED,
+    payload: errorMessage
+})

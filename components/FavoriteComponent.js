@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RectButton } from 'react-native-gesture-handler';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import {deleteFavorite} from '../redux/favorites/favoriteActions';
+import * as Animatable from 'react-native-animatable';
 
 const FavoriteComponent = (props) => {
 
@@ -34,7 +35,7 @@ const FavoriteComponent = (props) => {
           },
           { text: "OK", onPress: () => dispatch(deleteFavorite(item.id)) }
         ],
-        { cancelable: false }
+        { cancelable: true } // The Alert can be cancelled by tapping outside the Alert Dialogue Box.
       );
   
 
@@ -64,6 +65,7 @@ const FavoriteComponent = (props) => {
 
     return (
     <Swipeable renderRightActions={renderRightActions}>
+    <Animatable.View duration={2000}  animation="fadeInRightBig">
     <ListItem bottomDivider onPress={() => navigation.navigate('DishDetails',  {dishId: item.id})}>
       <Avatar source={{ uri: baseUrl + item.image}} />
       <ListItem.Content>
@@ -71,6 +73,7 @@ const FavoriteComponent = (props) => {
         <ListItem.Subtitle>{item.description}</ListItem.Subtitle>
       </ListItem.Content>
     </ListItem>
+    </Animatable.View>
     </Swipeable>
     )
   }
