@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react'
-import { ScrollView, Alert, PanResponder } from 'react-native';
+import React, { useState, useEffect, useRef} from 'react'
+import { ScrollView, Alert, PanResponder, View} from 'react-native';
 import RenderDish from './Dish';
 import RenderComments from './Comments';
 import {useSelector, useDispatch} from 'react-redux';
@@ -15,7 +15,8 @@ const DishDetail = (props) => {
 
     const {route} = props ;
     const dishId = route.params.dishId;
-
+ 
+    const [modalVisibility, setModalVisibility] = useState(false);
 
 
     const commentsList = useSelector(state => state.commentReducer);
@@ -37,12 +38,20 @@ const DishDetail = (props) => {
         dispatch(postFavorite(dishId));
     }
 
-    handleViewRef = ref => this.view = ref;
+    const handleViewRef = useRef(null);
 
     const recognizeDrag = ({moveX, moveY, dx, dy}) => {
          return (dx < -200) ? true : false ;  
     }
 
+    const recognizeComment = ({moveX, moveY, dx, dy}) => {
+        return (dx > 200) ? true : false ;  
+   }
+
+
+   const toggleModal = () => {
+    setModalVisibility(!modalVisibility);
+}
 
     const panResponder = PanResponder.create({
         onStartShouldSetPanResponder: (e, gestureState) => { //gestureState contains info that we need to
@@ -50,7 +59,7 @@ const DishDetail = (props) => {
         },                               // It will be called when the user's gestures begin on the screen.
 
         onPanResponderGrant: () =>{
-            this.view.rubberBand(1000)
+            handleViewRef.current.rubberBand(1000)
             .then(endState => console.log(endState.finished ? 'finished' : 'cancelled'));
         },
 
@@ -67,6 +76,10 @@ const DishDetail = (props) => {
                     { cancelable: false }
                 );
                 return true;
+            } else if(recognizeComment(gestureState)){
+                console.log("modalVisibility", modalVisibility);
+                toggleModal();
+                return true;
             }
     
         } //It will be called when user lifts his finger after executing gesture.
@@ -75,11 +88,14 @@ const DishDetail = (props) => {
 
     return (
         <ScrollView>
+            <View>
         <Animatable.View animation="fadeInDown" duration={2000} delay={1000}
-        {...panResponder.panHandlers} ref={this.handleViewRef}> 
+        {...panResponder.panHandlers} ref={handleViewRef}> 
             <RenderDish 
             dishId={dishId} 
-            onPress={() => markFavorite(dishId)} 
+            onPress={() => markFavorite(dishId)}
+            toggleModalDish = { () => toggleModal()}
+           modalVisibility = {modalVisibility}
             />
         </Animatable.View>
 
@@ -91,7 +107,7 @@ const DishDetail = (props) => {
             
         </Animatable.View>  }
 
-            
+        </View>
         </ScrollView>
     )
 }

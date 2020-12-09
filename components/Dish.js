@@ -10,19 +10,19 @@ import { postComment } from '../redux/comments/commentActions';
 
 const Dish = (props) => {
 
-    const {dishId, onPress} = props ;
+    const {dishId, onPress, toggleModalDish, modalVisibility} = props ;
     // const dishId = route.params.dishId;
+    console.log("modalVisibility", modalVisibility);
 
-    const [modalVisible, setModalVisible] = useState(false);
+    // const [modalVisible, setModalVisible] = useState(false);
     const [rating, setRating] = useState(0);
     const [author, setAuthor] = useState('');
     const [comment, setComment] = useState("");
-    const [date, setDate] = useState(Date.now());
-
+    const [date, setDate] = useState(Date.now())
    
-    const toggleModal = () => {
-        setModalVisible(!modalVisible);
-    }
+    // const toggleModal = () => {
+    //     setModalVisible(!modalVisible);
+    // }
 
     const resetForm = () => {
         setRating(0);
@@ -30,6 +30,7 @@ const Dish = (props) => {
         setComment('');
         setDate(Date.now())
     }
+
 
     const dishesList = useSelector(state => state.dishReducer);
     const { isLoading: loading, errorMessage: error, dishes: dishes } = dishesList;
@@ -39,18 +40,21 @@ const Dish = (props) => {
 
     const dispatch = useDispatch();
 
+
     useEffect(() => {
         dispatch(fetchDishes())
     
     }, [])
 
     const addComment= (dishId) => {
-        toggleModal();
+        toggleModalDish();
         dispatch(postComment(dishId, rating, author, comment));
         setDate(date.toISOString);
         console.log(rating, author, comment, date);
         resetForm();
     }
+
+
 
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -76,12 +80,12 @@ const Dish = (props) => {
                             name='pencil'
                             type='font-awesome'
                             color="#512DA8"
-                            onPress={() => addComment()}
+                            onPress={() => toggleModalDish()}
                         />
                         </View>
                     </Card>}
 
-                    <Modal animationType="slide" transparent={false} visible={modalVisible}>
+                    <Modal animationType="slide" transparent={false} visible={modalVisibility}>
                     <View style={styles.modal}>
 
                             <Rating ratingCount={5} imageSize={40} 
@@ -106,7 +110,7 @@ const Dish = (props) => {
                         </View>
                         <View style={{marginVertical:10}}>
                             <Button title="CANCEL" color='#A9A9A9' 
-                            onPress={()=>{ toggleModal(); resetForm()}}/>                            
+                            onPress={()=>{ toggleModalDish(); resetForm()}}/>                            
                         </View>
                     </View>
                     </Modal>
