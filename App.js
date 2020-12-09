@@ -15,11 +15,11 @@ import LoadingComponent from './components/LoadingComponent';
 
   return (
     <Provider store={store}>
-      <PersistGate loading={<LoadingComponent/>} persistor={persistor}>
+      {/* <PersistGate loading={<LoadingComponent/>} persistor={persistor}> */}
     <NavigationContainer>
         <Main/>
     </NavigationContainer>
-    </PersistGate>
+    {/* </PersistGate> */}
     </Provider>
   );
 }

@@ -8,6 +8,7 @@ import HomeNavigator from './HomeNavigator';
 import ContactNavigator from './ContactNavigator';
 import ReservationNavigator from './ReservationNavigator';
 import FavoriteNavigator from './FavoriteNavigator';
+import LoginNavigator from './LoginNavigator';
 
 
 
@@ -44,7 +45,19 @@ const MainComponent= () => {
         // </View>
        
        <Drawer.Navigator   drawerStyle={{ backgroundColor: '#D1C4E9' }}
-       drawerContent={props => <CustomDrawerContentComponent {...props} />}>
+       drawerContent={props => <CustomDrawerContentComponent {...props}/>}
+       initialRouteName="Home">
+            <Drawer.Screen name="Login" component={LoginNavigator}
+            options={{title:"Login", drawerLabel: "Login", 
+            drawerIcon: ({ tintColor, focused }) => (
+              <Icon
+                name='sign-in'
+                type='font-awesome'            
+                size={24}
+                color={tintColor}
+              />
+            ),}} />
+
             <Drawer.Screen name="Home" component={HomeNavigator}
             options={{title:"Home", drawerLabel: "Home", 
             drawerIcon: ({ tintColor, focused }) => (

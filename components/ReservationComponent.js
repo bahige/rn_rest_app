@@ -3,6 +3,8 @@ import { View, Text, ScrollView, StyleSheet, Switch, Button, Modal, Alert } from
 import {Picker} from '@react-native-picker/picker';
 import Datepicker from 'react-native-datepicker';
 import * as Animatable from 'react-native-animatable';
+import * as Permissions from 'expo-permissions';
+import * as Notifications from 'expo-notifications';
 
 const ReservationComponent = () => {
     const [guests, setGuests] = useState(1);
@@ -36,13 +38,42 @@ const ReservationComponent = () => {
             },
             {
                 text: "OK",
-                onPress: () => resetForm(),
+                onPress: () => {presentLocalNotification(date); resetForm()},
                 style: "cancel"
             },
         ],
             {cancelable: false}
         )
     }
+
+    const obtainNotificationPermission= async () => {
+        let permission = await Permissions.getAsync(Permissions.USER_FACING_NOTIFICATIONS);
+
+        if(permission.status!== 'granted'){
+            permission = await Permissions.askAsync (Permissions.USER_FACING_NOTIFICATIONS);
+            if (permission.status !== 'granted') {
+                Alert.alert("Permission not granted to show notifications.")
+            }
+        }
+        return permission;
+    }
+
+    const presentLocalNotification = async (date) => {
+        await obtainNotificationPermission();
+        Notifications.presentNotificationAsync({
+            title: 'Your Reservation',
+            body: 'Reservation for '+ date + ' requested',
+            ios: {
+                sound: true
+            },
+            android: {
+                sound: true,
+                vibrate: true,
+                color: '#512DA8'
+            }
+        })
+    }
+
 
     return (
     <ScrollView>
