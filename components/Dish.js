@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import { View, Text, StyleSheet, Modal, Button} from 'react-native'
+import { View, Text, StyleSheet, Modal, Button, Share} from 'react-native'
 import {Card, Icon, Rating, Input} from 'react-native-elements';
 import {baseUrl} from '../shared/baseUrl';
 import { useDispatch, useSelector } from "react-redux";
@@ -53,7 +53,16 @@ const Dish = (props) => {
         console.log(rating, author, comment, date);
         resetForm();
     }
-
+ 
+    const shareDish = (title, message, url) => {
+        Share.share({
+            title: title,
+            message: `${title} : ${message} : ${url}`,
+            url: url
+        }, {
+            dialogTitle: `Share ${title}`
+        });
+    }
 
 
     return (
@@ -81,6 +90,14 @@ const Dish = (props) => {
                             type='font-awesome'
                             color="#512DA8"
                             onPress={() => toggleModalDish()}
+                        />
+                        <Icon
+                            raised //button like display of icon
+                            reverse //reverse color
+                            name='share'
+                            type='font-awesome'
+                            color="#51D2A8"
+                            onPress={() => shareDish(dishes[dishId].name, dishes[dishId].description, baseUrl + dishes[dishId].name)}
                         />
                         </View>
                     </Card>}
