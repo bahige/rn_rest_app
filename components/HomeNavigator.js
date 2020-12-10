@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import { View, Text } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack';
 import Home from './Home';
 import {Icon} from 'react-native-elements'

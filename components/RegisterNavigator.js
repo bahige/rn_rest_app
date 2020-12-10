@@ -1,11 +1,10 @@
 import React, {useState} from 'react'
 import { createStackNavigator } from '@react-navigation/stack';
 import {Icon} from 'react-native-elements'
-import LoginComponent from './LoginComponent';
-import LogInRegTabNavigator from './LogInRegTabNavigator';
+import RegisterComponent from './RegisterComponent';
 
 
-const LoginNavigator= (props) => {
+const RegisterNavigator= (props) => {
 
 const {navigation} =props;
 
@@ -15,7 +14,7 @@ const Stack = createStackNavigator();
 
     return (
       <Stack.Navigator>
-          <Stack.Screen name="Login" component={LoginComponent} 
+          <Stack.Screen name="Register" component={RegisterComponent} 
             options={{ headerStyle:{backgroundColor:"#512DA8"},
             headerTintColor: '#fff',
             headerTitleStyle: {
@@ -32,5 +31,5 @@ const Stack = createStackNavigator();
 
 
 
-export default LoginNavigator;
+export default RegisterNavigator;
 

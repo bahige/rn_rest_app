@@ -1,9 +1,12 @@
 import React, {useEffect, useState} from 'react'
-import { View, Button, StyleSheet } from 'react-native'
-import {Card, Icon, Input, CheckBox } from 'react-native-elements'
+import { View, StyleSheet } from 'react-native'
+import {Button, Icon, Input, CheckBox } from 'react-native-elements'
 import * as SecureStore from 'expo-secure-store'
+import { ScrollView } from 'react-native-gesture-handler'
 
-const LoginComponent = () => {
+const LoginComponent = (props) => {
+
+    const {navigation} = props;
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -44,6 +47,7 @@ const LoginComponent = () => {
 
 
     return (
+        <ScrollView>
         <View style={styles.container}>
             <Input placeholder="Username"
             leftIcon={{type : 'font-awesome', name: 'user-o'}}
@@ -62,11 +66,21 @@ const LoginComponent = () => {
             onPress={()=> setRemember(!remember)} containerStyle={styles.formCheckbox}/>
 
             <View style={styles.formButton}>
-                <Button 
+            <Button 
                 onPress={()=> handleLogin()}
-                title="Login" color='#512DA8'/>
+                title="Login" color='#512DA8'
+                icon={<Icon  name='sign-in' type='font-awesome'  size={20}
+                color= 'white'></Icon>}/>
+            </View>
+            <View style={styles.formButton}>
+            <Button 
+                onPress={()=> navigation.navigate("Register")}
+                title="Register" color='#512DA8' type='clear'
+                icon={<Icon  name='user-plus' type='font-awesome'  size={20}
+                color= '#512DA8'></Icon>}/>
             </View>
         </View>
+        </ScrollView>
     )
 }
 
